@@ -1,0 +1,3 @@
+[submodule "pico-bme688"]
+	path = pico-bme688
+	url = https://github.com/bablokb/pico-bme688.git
