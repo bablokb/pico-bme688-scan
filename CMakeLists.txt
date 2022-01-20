@@ -36,7 +36,6 @@ add_compile_definitions(ALTITUDE_AT_LOC=520)
 add_compile_definitions(HEATER_TEMP=100,200,300)
 add_compile_definitions(HEATER_DURATION=100,150,300)
 add_compile_definitions(UPDATE_INTERVAL=10)
-#add_compile_definitions(WITH_UNITS)
 
 # configuration for the library (override if necessary)
 add_compile_definitions(BME68X_DO_NOT_USE_FPU)
