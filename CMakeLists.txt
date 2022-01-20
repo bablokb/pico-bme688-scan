@@ -33,8 +33,8 @@ add_executable(pico-bme688-scan pico-bme688-scan.c )
 
 # program configuration
 add_compile_definitions(ALTITUDE_AT_LOC=520)
-add_compile_definitions(HEATER_TEMP=300)
-add_compile_definitions(HEATER_DURATION=100)
+add_compile_definitions(HEATER_TEMP=100,200,300)
+add_compile_definitions(HEATER_DURATION=100,150,300)
 add_compile_definitions(UPDATE_INTERVAL=10)
 #add_compile_definitions(WITH_UNITS)
 
