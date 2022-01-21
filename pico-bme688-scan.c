@@ -20,24 +20,25 @@ static float alt_fac;
 // print sensor data to console
 
 void print_data(uint32_t ts, struct bme68x_data *data, uint8_t index) {
-  float temp, press, hum;
+  float temp, press, hum, gas;
 
   temp  = 0.01f  * data->temperature;
   press = 0.01f  * data->pressure/alt_fac;
   hum   = 0.001f * data->humidity;
+  gas   = 0.001f * data->gas_resistance;
 
   #ifdef DEBUG
   // print every observation on a single line
-  printf("%lu ms, %0.1f deg C, %0.0f hPa, %0.0f%%, %lu Ohm, 0x%x, %d\n",
-         ts,temp,press,hum,data->gas_resistance,data->status,index);
+  printf("%lu ms, %0.1f deg C, %0.0f hPa, %0.0f%%, %0.0f kOhm, 0x%x, %d\n",
+         ts,temp,press,hum,gas,data->status,index);
   #else
   // print a single line for all measurements
   if (index) {
-    printf(",%lu",data->gas_resistance);
+    printf(",%0.0f",gas);
   } else {
     // first measurement in cycle, print main sensor data
-    printf("%lu,%0.1f,%0.0f,%0.0f,%lu",
-            ts,temp,press,hum,data->gas_resistance);
+    printf("%lu,%0.1f,%0.0f,%0.0f,%0.0f",
+            ts,temp,press,hum,gas);
   }
   #endif
 }
@@ -109,7 +110,7 @@ int main(void) {
   printf("TimeStamp(ms),Temp(deg C),Press(Pa),Hum(%%)");
   for (uint8_t t=0; t<temp_n; ++t) {
     for (uint8_t d=0; d<dur_n; ++d) {
-      printf(",Gas(%d C,%d ms:ohm)",heater_temp[t],heater_dur[d]);
+      printf(",Gas(%d C,%d ms:kOhm)",heater_temp[t],heater_dur[d]);
     }
   }
   #ifdef DEBUG
