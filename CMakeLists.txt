@@ -56,7 +56,7 @@ pico_set_program_name(pico-bme688-scan "pico-bme688-scan")
 pico_set_program_version(pico-bme688-scan "0.1")
 
 pico_enable_stdio_uart(pico-bme688-scan 1)
-pico_enable_stdio_usb(pico-bme688-scan 0)
+pico_enable_stdio_usb(pico-bme688-scan 1)
 
 # build the bme688-library from our submodule
 add_subdirectory(pico-bme688)
