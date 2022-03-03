@@ -32,18 +32,22 @@ pico_sdk_init()
 add_executable(pico-bme688-scan pico-bme688-scan.c )
 
 # program configuration
-add_compile_definitions(ALTITUDE_AT_LOC=520)
-add_compile_definitions(HEATER_TEMP=100,200,300)
-add_compile_definitions(HEATER_DURATION=100,150,300)
-add_compile_definitions(UPDATE_INTERVAL=10)
+set(ALTITUDE_AT_LOC "520"                  CACHE STRING "altitude at location")
+set(HEATER_TEMP     "100,200,300"          CACHE STRING "array of heater-temperatures")
+set(HEATER_DURATION "100,150,300"          CACHE STRING "array of heater-durations")
+set(UPDATE_INTERVAL "10"                   CACHE STRING "update interval")
 
 # configuration for the library (override if necessary)
-add_compile_definitions(BME68X_DO_NOT_USE_FPU)
-add_compile_definitions(BME68X_PORT=i2c1)
-add_compile_definitions(BME68X_ADDR=BME68X_I2C_ADDR_HIGH)
-add_compile_definitions(BME68X_SDA=2)
-add_compile_definitions(BME68X_SCL=3)
-#add_compile_definitions(BME68X_I2C_PU)      # use builtin-pullups
+#set(BME68X_PORT     "i2c1"                 CACHE STRING "i2c-port name")
+#set(BME68X_SDA      "2"                    CACHE STRING "SDA pin-number for BME68X")
+#set(BME68X_SCL      "3"                    CACHE STRING "SCL pin-number for BME68X")
+#set(BME68X_ADDR     "BME68X_I2C_ADDR_HIGH" CACHE STRING "BME68x address constant")
+#set(BME68X_I2C_PU   "NO_BME68X_I2C_PU"     CACHE STRING "use (NO) builtin pullups")
+
+add_compile_definitions(HEATER_TEMP=${HEATER_TEMP})
+add_compile_definitions(HEATER_DURATION=${HEATER_DURATION})
+add_compile_definitions(UPDATE_INTERVAL=${UPDATE_INTERVAL})
+add_compile_definitions(ALTITUDE_AT_LOC=${ALTITUDE_AT_LOC})
 
 # add preprocessor-constant DEBUG for Debug-builds
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
